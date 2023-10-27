@@ -81,3 +81,15 @@ export default function Layout({ children, modal }) {
   );
 }
 ```
+
+#### use client 에러메세지
+
+```
+You're importing a component that needs useState. It only works in a Client Component but none of its parents are marked with "use client", so they're Server Components by default.
+Learn more: https://nextjs.org/docs/getting-started/react-essentials
+```
+
+<img width="1028" alt="iShot_2023-10-27_17 51 32" src="https://github.com/gayoung106/AppRouter-xcom/assets/98731537/cfa57175-14f4-4103-bd0d-991748d6853d">
+- useState 훅은 client 컴포넌트에서만 동작을 하는데, 지금 server 컴포넌트를 사용하고 있다
+- 서버컴포넌트? nextJS는 컴포넌트가 서버에서 돌아감. 이 경우 클라이언트 컴포넌트(기존 리액트)에서 사용하던 hooks를 사용할 수 없게 됨. 따라서 클라이언트 컴포넌트로 바꾸는 작업을 별도로 해야함
+- 클라이언트 컴포넌트로 바꾸는 방법: 파일 상단에 "use client"를 써주면 끝
