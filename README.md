@@ -60,3 +60,24 @@ export default async function HomeLayout({ children }) {
 - (afterLogin)/(beforeLogin): 소괄호는 경로에 영향을 주지 않으나, 구조를 묶는 역할을 할 수 있음
 - [username]: 대괄호는 정보에 따라 바뀔 수 있는 경로
 - 따라서 [i/flow/login], [i/flow/signup]외에 모든 폴더는 (afterLogin)이하로 위치함
+
+#### 패러랠 모달: 뒷 배경은 [app/page.tsx]가 남아있고, 로그인을 누르면 [i/flow/login/page.tsx]가 모달로 띄워지는 기능
+
+- [app/page.tsx] 그리고 [app/(beforeLogin)/@modal/page.tsx] `page.tsx`를 동시에 보여주겠다
+- 하지만 각각의 폴더가 다름
+- 이 경우 패러랠 모달 기능을 할 수 없음
+- 따라서 [app/page.tsx]를 [app/(beforeLogin)/page.tsx]로 경로를 변경해야 함
+- 또한 [app/layout.tsx]도 패러랠 모달 폴더와 위치가 같아야 함
+- 이 경우에는 해당 폴더 안에 layout.tsx 파일을 만들어줌
+
+```ts
+export default function Layout({ children, modal }) {
+  return (
+    <div>
+      비포 레이아웃
+      {children}
+      {modal}
+    </div>
+  );
+}
+```
