@@ -82,6 +82,36 @@ export default function Layout({ children, modal }) {
 }
 ```
 
+- 모달을 띄웠을 때, url 경로가 [i/flow/login]임
+- 따라서 경로 수정
+
+* 주의할 점
+
+- localhost:3000일때, children / page.tsx가 띄워지기 때문에 modal이 띄워질 때, `default.tsx`를 따로 만들어서 @modal/default.tsx가 되도록 해야함
+- 그러면, localhost:3000/i/flow/login일때 [i/flow/login/page.tsx]이고, modal은 [@modal/i/flow/login.page.tsx]가 가능
+  ![iShot_2023-10-29_11 43 47](https://github.com/gayoung106/AppRouter-xcom/assets/98731537/5d7d1d9d-630d-4db5-a74d-290e04d3c5e3)
+
+![iShot_2023-10-29_11 44 00](https://github.com/gayoung106/AppRouter-xcom/assets/98731537/b13434e9-5845-4acd-acfb-4a21f95c4bdf)
+
+- 이제 패러럴 모달의 기능은 끝.
+
+#### 인터셉팅 라우팅: 서로 주소가 다른데, 한 화면에 동시에 띄을 수 있음
+
+- 현재 @modal/i가 children의 i 경로를 대체하고 싶음
+- @modal의 i 폴더를 [(.)i]로 변경
+- 패러럴라우트가 인터셉팅을 해서 '/'경로에서 같이 띄워지는 느낌
+  ![iShot_2023-10-29_12 18 35](https://github.com/gayoung106/AppRouter-xcom/assets/98731537/8f2f5223-cdea-46f2-b247-60f1665376b9)
+- 원리: 인터셉팅 라우팅이 있다면, children-page.tsx에서
+
+```tsx
+<Link href="/i/flow/login" className={styles.login}>
+  로그인
+</Link>
+```
+
+- 이 경로를 children 경로의 [i/flow/login]이 아니라
+- [@modal/(.)i/flow/login]에서 인터셉팅해서 처리함
+
 #### use client 에러메세지
 
 ```
